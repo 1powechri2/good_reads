@@ -15,3 +15,19 @@ describe 'A user sees all books' do
     end
   end
 end
+describe 'A user can click a book title to see that book page' do
+  context 'it visits the index' do
+    it 'clicks a title and is routed to book page' do
+      book_one = Book.create(title: 'hehaew')
+      book_two = Book.create(title: 'woo tang')
+      book_three = Book.create(title: 'kool')
+
+      visit books_path
+
+      click_on(book_one.title)
+
+      expect(current_path).to eq(book_path(book_one))
+      expect(page).to have_content(book_one.title)
+    end
+  end
+end
